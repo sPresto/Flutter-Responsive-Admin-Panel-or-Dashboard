@@ -1,3 +1,4 @@
+import 'package:admin/UIComponents/Core/%20LazyIndexedStack.dart';
 import 'package:admin/controllers/MenuAppController.dart';
 import 'package:admin/responsive.dart';
 import 'package:admin/screens/dashboard/dashboard_screen.dart';
@@ -9,6 +10,9 @@ import 'components/side_menu.dart';
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // View Model
+    var viewModel = context.watch<MenuAppController>();
+
     return Scaffold(
       key: context.read<MenuAppController>().scaffoldKey,
       drawer: SideMenu(),
@@ -26,7 +30,18 @@ class MainScreen extends StatelessWidget {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: DashboardScreen(),
+              child: LazyIndexedStack(
+                index: viewModel.tabBarIndex,
+                children: [
+                  DashboardScreen(),
+                  Center(
+                    child: Text("data 1"),
+                  ),
+                  Center(
+                    child: Text("data 2"),
+                  )
+                ],
+              ),
             ),
           ],
         ),

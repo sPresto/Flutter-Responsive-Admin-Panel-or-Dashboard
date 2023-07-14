@@ -1,5 +1,7 @@
+import 'package:admin/controllers/MenuAppController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -8,6 +10,9 @@ class SideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // View Model
+    var viewModel = context.watch<MenuAppController>();
+
     return Drawer(
       child: ListView(
         children: [
@@ -17,17 +22,23 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashboard.svg",
-            press: () {},
+            press: () {
+              viewModel.changeTab(0);
+            },
           ),
           DrawerListTile(
             title: "Transaction",
             svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
+            press: () {
+              viewModel.changeTab(1);
+            },
           ),
           DrawerListTile(
             title: "Task",
             svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
+            press: () {
+              viewModel.changeTab(2);
+            },
           ),
           DrawerListTile(
             title: "Documents",
